@@ -11,3 +11,22 @@ padre(X,Y):-
 madre(X,Y):-
     familia(_,mama(X),Hijos), 
     member(Y,Hijos).
+
+acudiente(X, Y):- padre(X, Y).
+acudiente(X, Y):- madre(X, Y).
+
+hijo(X,Y):-acudiente(X,Y).
+
+hermano(X,Y):-
+    familia(_,_,Hijos),
+    member(X,Hijos),
+    member(Y,Hijos),
+    X \= Y.
+
+abuelo(X, Y) :- acudiente(X, Z), acudiente(Z, Y).
+nieto(X, Y)  :- abuelo(Y, X).
+
+tio(X, Y)    :- hermano(X, Z), acudiente(Z, Y).
+sobrino(X, Y):- tio(Y, X).
+
+primo(X, Y)  :- acudiente(Z, X), tio(Z, Y).
