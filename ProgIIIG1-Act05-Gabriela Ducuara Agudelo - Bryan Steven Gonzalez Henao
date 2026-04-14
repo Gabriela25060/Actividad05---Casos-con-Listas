@@ -30,3 +30,19 @@ tio(X, Y)    :- hermano(X, Z), acudiente(Z, Y).
 sobrino(X, Y):- tio(Y, X).
 
 primo(X, Y)  :- acudiente(Z, X), tio(Z, Y).
+
+2) ciudades de canada.
+
+nodo(vancouver, [viaje(edmonton, 16), viaje(calgary, 13)]).
+nodo(calgary,   [viaje(edmonton, 4), viaje(regina, 14)]).
+nodo(edmonton,  [viaje(saskatoon, 12)]).
+nodo(saskatoon, [viaje(calgary, 9), viaje(winnipeg, 20)]).
+nodo(regina,    [viaje(saskatoon, 7), viaje(winnipeg, 4)]).
+nodo(winnipeg,  []).
+
+conecta(X, Y, Costo) :-
+    nodo(X, ListaViajes),
+    member(viaje(Y, Costo), ListaViajes).
+
+arista(X) :- 
+    conecta(X, _, _).
