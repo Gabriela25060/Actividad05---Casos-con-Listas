@@ -36,6 +36,7 @@ primo(X, Y)  :- acudiente(Z, X), tio(Z, Y).
 nodo(vancouver, [viaje(edmonton, 16), viaje(calgary, 13)]).
 nodo(calgary,   [viaje(edmonton, 4), viaje(regina, 14)]).
 nodo(edmonton,  [viaje(saskatoon, 12)]).
+
 nodo(saskatoon, [viaje(calgary, 9), viaje(winnipeg, 20)]).
 nodo(regina,    [viaje(saskatoon, 7), viaje(winnipeg, 4)]).
 nodo(winnipeg,  []).
@@ -46,3 +47,15 @@ conecta(X, Y, Costo) :-
 
 arista(X) :- 
     conecta(X, _, _).
+
+costo(X, Y, Z, C) :- 
+    conecta(X, Y, C1), 
+    conecta(Y, Z, C2), 
+    C is C1 + C2.
+
+ruta(X, Y) :- 
+    conecta(X, Y, _).
+
+ruta(X, Y) :- 
+    conecta(X, Z, _), 
+    ruta(Z, Y).
