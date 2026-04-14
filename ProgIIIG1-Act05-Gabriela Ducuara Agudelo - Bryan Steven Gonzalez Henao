@@ -1,1 +1,13 @@
 
+familia(papa(abraham),mama(mona),[herbert,homero]).
+familia(papa(clancy),mama(jacqueline), [marge, patty, selma]).
+familia(papa(homero), mama(marge), [bart, lisa, maggie]).
+familia(papa(_), mama(selma), [ling]).
+
+padre(X,Y):-
+    familia(papa(X),_,Hijos),
+    member(Y,Hijos).
+
+madre(X,Y):-
+    familia(_,mama(X),Hijos), 
+    member(Y,Hijos).
